@@ -1,0 +1,33 @@
+name: board github actions
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build_and_deploy:
+    runs-on: ubuntu-latest      
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Print environment variables
+      run: |
+        echo "GITHUB_WORKSPACE: $GITHUB_WORKSPACE"
+        echo "RUNNER_OS: $RUNNER_OS"
+        echo "RUNNER_TEMP: $RUNNER_TEMP"
+        echo "RUNNER_TOOL_CACHE: $RUNNER_TOOL_CACHE"
+
+    - name: Set up Docker Compose
+      run: sudo apt-get update && sudo apt-get install -y docker-compose
+
+    - name: Build and push Docker images
+      run: docker compose up -d
+      
+    - name: Complete job
+      run: docker ps -a
