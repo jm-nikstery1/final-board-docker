@@ -2,20 +2,18 @@ from rest_framework.request import Request
 from rest_framework.response import Response
 from rest_framework.views import APIView, status
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
-from rest_framework_simplejwt.tokens import Token
 from rest_framework.generics import get_object_or_404   # id 있는지 탐색
 
 from .serializers import UserLoginSerializer, UserRegisterSerializer, UserInfoSerializer, LogoutSerializer, UserNameUpdateSerializer, UserPasswordUpdateSerializer
 
 # 내가 추가한 것
-from drf_spectacular.utils import extend_schema, extend_schema_view, OpenApiExample, OpenApiParameter
+from drf_spectacular.utils import extend_schema, OpenApiParameter
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated, AllowAny
 
 from rest_framework_simplejwt.views import (
     TokenBlacklistView,
     TokenObtainPairView,
-    TokenRefreshView,
 )
 
 from django.contrib.auth import get_user_model

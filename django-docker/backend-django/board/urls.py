@@ -1,5 +1,4 @@
-from django.urls import path, include
-from rest_framework import routers
+from django.urls import path
 from rest_framework.routers import DefaultRouter
 
 from .views import get_post, get_id_post, like_post, create_post, delete_post, update_post,\
