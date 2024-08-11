@@ -11,7 +11,7 @@ RUN apt-get update && apt-get -y install \
     libpq-dev python3-pip python3-dev -y
 
 RUN pip install --upgrade pip
-RUN pip install "poetry==$POETRY_VERSION" --no-cache-dir
+RUN pip install "poetry==1.8.2" --no-cache-dir
 
 WORKDIR /backend-django 
 
@@ -20,6 +20,10 @@ COPY ./backend-django /backend-django
 RUN ls -la /backend-django
 
 RUN poetry install
+
+RUN poetry run pytest --cov --cov-report=xml:tests/test_output/test_output_report_cov_1.xml || echo 'pytest run'
+
+
 RUN poetry run python manage.py collectstatic --no-input
 
 WORKDIR /backend-django

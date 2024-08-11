@@ -1,0 +1,49 @@
+version: '3'
+
+name: board-docker
+
+volumes:
+  frontend:
+  backend:
+
+networks:
+  board-network:
+    driver: bridge
+
+services:
+  frontend:
+    container_name: frontend_web
+    build:
+      context: ./svelte-docker
+      dockerfile: frontend_svelte.dockerfile
+    ports:        
+      - "5173:5173"
+    networks:
+      - board-network
+ 
+  backend:
+    container_name: backend_db
+    build:
+      context: ./django-docker
+      dockerfile: backend_django.dockerfile
+    volumes:
+      - ./django-docker/backend-django/tests/test_output:/django-docker/backend-django/tests/test_output
+
+    ports:
+      - "8000:8000"
+    networks:
+      - board-network
+
+
+  nginx:
+    container_name: nginx
+    build:
+      context: ./nginx-docker
+      dockerfile: nginx_docker.dockerfile
+    ports:
+      - "80:80"
+    depends_on:
+      - frontend
+      - backend
+    networks:
+      - board-network
