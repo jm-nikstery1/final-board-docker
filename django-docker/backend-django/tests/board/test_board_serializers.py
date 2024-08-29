@@ -120,10 +120,10 @@ def test_post_list_serializer():
     assert data[0]['subject'] == 'test 제목 1'
     assert data[1]['subject'] == 'test 제목 2'
 
-    assert 'comments' in data[0]
+    assert 'comments' in data[0] 
     assert 'comments' in data[1]
     assert data[0]['user']['email'] == 'testuser@test.com'
-    assert data[1]['user']['username'] == 'testuser'
+    assert data[1]['user']['username'] == 'testuser' 
 
 
 @pytest.mark.django_db
@@ -145,6 +145,5 @@ def test_comment_list_serializer():
     assert data[0]['text'] == 'test 답변 1'
     assert data[1]['text'] == 'test 답변 2'
 
-    assert data[0]['user']['email'] == 'testuser@test.com'
-    assert data[1]['user']['username'] == 'testuser'
-
+    assert data[0]['user']['email'] == 'testuser@test.com' 
+    assert data[1]['user']['username'] == 'testuser' 

@@ -21,9 +21,6 @@ RUN ls -la /backend-django
 
 RUN poetry install
 
-RUN poetry run pytest --cov --cov-report=xml:tests/test_output/test_output_report_cov_1.xml || echo 'pytest run'
-
-
 RUN poetry run python manage.py collectstatic --no-input
 
 WORKDIR /backend-django

@@ -34,7 +34,7 @@ urlpatterns = [
     path("google/login/callback/", GoogleOAuthCallbackView.as_view(), name="api_accounts_google_oauth_callback"),
     path("google/login/", GoogleLoginView.as_view(), name="api_accounts_google_oauth"),
 
-    # 이메일 인증 - 이거는 구글 Oauth로 할때는 하는것이 아니라 - 회원가입시 - 등록한 이메일 검증임
+    # 이메일 인증 - 회원가입시 - 등록한 이메일 검증임
     #re_path(r'^account-confirm-email/$', VerifyEmailView.as_view(), name='account_email_verification_sent'),
     # 유저가 클릭한 이메일(=링크) 확인
     #re_path(r'^account-confirm-email/(?P<key>[-:\w]+)/$', ConfirmEmailView.as_view(), name='account_confirm_email'),

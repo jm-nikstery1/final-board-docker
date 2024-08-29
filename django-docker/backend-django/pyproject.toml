@@ -30,6 +30,7 @@ pytest-playwright = "^0.5.1"
 pytest-sugar = "^1.0.0"
 pytest-mock = "^3.14.0"
 pytest-django = "^4.8.0"
+allure-pytest = "^2.13.5"
 
 
 [build-system]

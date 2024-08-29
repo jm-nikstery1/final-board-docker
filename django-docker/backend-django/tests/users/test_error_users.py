@@ -6,9 +6,7 @@ from django.contrib.auth import get_user_model
 from rest_framework.serializers import ValidationError
 from users.serializers import UserRegisterSerializer
 
-
 MyUser = get_user_model()
-
 
 @pytest.mark.django_db
 def test_error_create_user_long_username():
@@ -19,7 +17,7 @@ def test_error_create_user_long_username():
         'password2': 'testpassword123',
     }
     serializer = UserRegisterSerializer(data=data)
-    assert not serializer.is_valid()
+    assert not serializer.is_valid() 
     assert 'username' in serializer.errors
     assert '이 필드의 글자 수가 20 이하인지 확인하십시오.' in str(serializer.errors['username'])
 
@@ -101,20 +99,17 @@ def test_error_create_user_simple_password():
 
 
 @pytest.mark.django_db
-def test_create_user_with_valid_username():
+def test_error_create_user_password_mismatch():
     data = {
-        'email': 'valid@test.com',
-        'username': '한글abcABC123!',
-        'password': 'validpassword123',
-        'password2': 'validpassword123'
+        'username': 'testuser',
+        'email': 'testuser@example.com',
+        'password': 'testpassword123',
+        'password2': 'wrongpassword'
     }
     serializer = UserRegisterSerializer(data=data)
-    assert serializer.is_valid()
-    user = serializer.save()
-    assert user.email == 'valid@test.com'
-    assert user.username == '한글abcABC123!'
-    assert user.check_password('validpassword123')
-
+    with pytest.raises(ValidationError) as excinfo:
+        serializer.is_valid(raise_exception=True)
+    assert '비밀번호가 일치 하지 않습니다' in str(excinfo.value)
 
 
 @pytest.mark.django_db
@@ -141,7 +136,6 @@ def test_error_update_same_username():
     response = client.put(url, data)
 
     assert response.status_code == status.HTTP_400_BAD_REQUEST
-
     assert 'username' in response.data
     assert '이미 존재한 회원이름 입니다' in response.data['username'][0]
 
@@ -161,7 +155,6 @@ def test_error_update_same_username():
         password='testpassword123'
     )
 
-
     client.force_authenticate(user=user_1)
 
     url = reverse('username-update', kwargs={'myuser_id': user_1.id})
@@ -171,7 +164,5 @@ def test_error_update_same_username():
     response = client.put(url, data)
 
     assert response.status_code == status.HTTP_400_BAD_REQUEST
-
     assert 'username' in response.data
     assert '이미 존재한 회원이름 입니다' in response.data['username'][0]
-

@@ -26,9 +26,6 @@ services:
     build:
       context: ./django-docker
       dockerfile: backend_django.dockerfile
-    volumes:
-      - ./django-docker/backend-django/tests/test_output:/django-docker/backend-django/tests/test_output
-
     ports:
       - "8000:8000"
     networks:

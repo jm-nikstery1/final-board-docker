@@ -26,6 +26,3 @@ def test_create_superuser():
     assert user.username == 'admin'
     assert user.check_password('adminpassword123')
     assert user.is_admin
-
-
-

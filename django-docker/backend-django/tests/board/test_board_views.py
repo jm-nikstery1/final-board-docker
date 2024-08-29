@@ -103,7 +103,6 @@ def test_like_post():
     assert not post.likes.filter(id=user.id).exists()
 
 
-
 @pytest.mark.django_db
 def test_create_comment():
     client = APIClient()
@@ -145,7 +144,6 @@ def test_update_comment():
     assert response.status_code == status.HTTP_204_NO_CONTENT
     comment.refresh_from_db()
     assert comment.text == 'update 답변'
-
 
 
 @pytest.mark.django_db

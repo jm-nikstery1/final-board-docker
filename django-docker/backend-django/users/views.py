@@ -6,7 +6,6 @@ from rest_framework.generics import get_object_or_404   # id 있는지 탐색
 
 from .serializers import UserLoginSerializer, UserRegisterSerializer, UserInfoSerializer, LogoutSerializer, UserNameUpdateSerializer, UserPasswordUpdateSerializer
 
-# 내가 추가한 것
 from drf_spectacular.utils import extend_schema, OpenApiParameter
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated, AllowAny

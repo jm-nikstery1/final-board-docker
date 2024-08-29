@@ -26,17 +26,6 @@ def test_user_register_serializer():
     assert user.email == 'testuser@example.com'
     assert user.check_password('testpassword123')
 
-@pytest.mark.django_db
-def test_user_register_serializer_password_mismatch():
-    data = {
-        'username': 'testuser',
-        'email': 'testuser@example.com',
-        'password': 'testpassword123',
-        'password2': 'wrongpassword'
-    }
-    serializer = UserRegisterSerializer(data=data)
-    with pytest.raises(ValidationError):
-        serializer.is_valid(raise_exception=True)
 
 @pytest.mark.django_db
 def test_user_login_serializer():

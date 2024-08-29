@@ -12,13 +12,13 @@ def test_post_model():
     assert post.user == user
     assert post.subject == 'test 제목'
     assert post.content == 'test 내용'
-    assert post.likes.count() == 0
+    assert post.likes.count() == 0  
 
-    post.likes.add(user)
+    post.likes.add(user) 
     assert post.likes.count() == 1
     assert post.likes.first() == user
 
-    post.likes.remove(user)
+    post.likes.remove(user) 
     assert post.likes.count() == 0
 
 @pytest.mark.django_db
@@ -30,11 +30,11 @@ def test_comment_model():
     assert comment.user == user
     assert comment.post == post
     assert comment.text == 'test 답변'
-    assert comment.likes.count() == 0
+    assert comment.likes.count() == 0 
 
-    comment.likes.add(user)
+    comment.likes.add(user) 
     assert comment.likes.count() == 1
     assert comment.likes.first() == user
 
-    comment.likes.remove(user)
+    comment.likes.remove(user) 
     assert comment.likes.count() == 0

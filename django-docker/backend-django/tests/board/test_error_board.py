@@ -13,13 +13,13 @@ def test_error_create_post_invalid_data():
     client = APIClient()
 
     user = MyUser.objects.create_user(username='testuser', email='testuser123@test.com', password='testpassword123')
-    client.force_authenticate(user=user)
+    client.force_authenticate(user=user) 
 
     data = {
         'content': 'Test Content',
     }
 
-    url = reverse('create_post')
+    url = reverse('create_post') 
     response = client.post(url, data, format='json')
 
     assert response.status_code == status.HTTP_400_BAD_REQUEST
@@ -57,7 +57,6 @@ def test_error_create_comment_authenticated():
     assert response.status_code == status.HTTP_401_UNAUTHORIZED
 
 
-
 @pytest.mark.django_db
 def test_error_update_post_authenticated():
     client = APIClient()
@@ -80,7 +79,6 @@ def test_error_update_post_authenticated():
 
     assert response.status_code == status.HTTP_403_FORBIDDEN
     assert response.data['detail'] == '게시글 수정 권한이 없습니다'
-
 
 
 @pytest.mark.django_db
@@ -107,7 +105,6 @@ def test_error_update_comment_authenticated():
     assert response.data['detail'] == '댓글 수정 권한이 없습니다'
 
 
-
 @pytest.mark.django_db
 def test_error_delete_post_authenticated():
     client = APIClient()
@@ -127,7 +124,6 @@ def test_error_delete_post_authenticated():
 
     assert response.status_code == status.HTTP_400_BAD_REQUEST
     assert response.data['detail'] == '게시글 삭제 권한이 없습니다'
-
 
 
 @pytest.mark.django_db
@@ -169,6 +165,7 @@ def test_error_like_post_authenticated():
     assert response.status_code == status.HTTP_401_UNAUTHORIZED
 
 
+
 @pytest.mark.django_db
 def test_error_like_comment_authenticated():
     client = APIClient()
@@ -185,4 +182,3 @@ def test_error_like_comment_authenticated():
     response = client.post(url)
 
     assert response.status_code == status.HTTP_401_UNAUTHORIZED
-
