@@ -34,9 +34,7 @@ SECRET_KEY = "django-insecure-j%9146orl=u=aky@ttdv3=0%*c6l-o9dema^4ryg3#(9%jaz#d
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1',
-                 'localhost',
-                 ]
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -79,6 +77,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    "corsheaders.middleware.CorsMiddleware",
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
@@ -86,8 +85,6 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
-
-    "corsheaders.middleware.CorsMiddleware",
     'allauth.account.middleware.AccountMiddleware',
 ]
 
@@ -97,17 +94,8 @@ ROOT_URLCONF = "django_backend.urls"
 AUTH_USER_MODEL = "users.MyUser" 
 
 
-CORS_ORIGIN_ALLOW_ALL = True   # 모든 호스트 허용 - CORS_ALLOWED_ORIGINS 여기 선택된 사이트만 되게하기용
-CORS_ALLOW_CREDENTIALS = True  #쿠키가 cross-site HTTP 요청에 포함
-
-
-# CORS 설정
-CORS_ALLOWED_ORIGINS = [
-    "http://127.0.0.1:5173",
-    "http://localhost:5173",
-    "http://127.0.0.1:8000",
-    "http://localhost:8000",
-]
+CORS_ALLOW_ALL_ORIGINS = True   # 모든 호스트 허용 
+CORS_ALLOW_CREDENTIALS = True   #쿠키가 cross-site HTTP 요청에 포함
 
 # CSRF 설정
 CSRF_TRUSTED_ORIGINS = [
