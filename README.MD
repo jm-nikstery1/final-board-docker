@@ -13,4 +13,3 @@
 - 정상적으로 구글 OAuth 작동 
 - 클라이언트 ID와 보안 비밀번호가 공개되면 안됨
 - git에는 클라이언트 ID와 보안 비밀번호 정보 제외 - 구글 OAuth2.0 제외된 상태
-- http://www.hard-make-name-ab.p-e.kr/  
